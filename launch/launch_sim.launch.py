@@ -67,12 +67,14 @@ def generate_launch_description():
         )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
-    # 2. Modern Gazebo Sim
+    # 2. Modern Gazebo Sim (Using Custom World)
+    world_path = os.path.join(get_package_share_directory(package_name), 'worlds', 'custom_empty.sdf')
+    
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'
         )]),
-        launch_arguments={'gz_args': 'empty.sdf -r'}.items()
+        launch_arguments={'gz_args': f'{world_path} -r'}.items()
     )
 
     # 3. Modern Gazebo Spawner
@@ -95,7 +97,8 @@ def generate_launch_description():
             '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
             '/model/ros_bot/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry'
+            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'
         ],
         remappings=[
             ('/model/ros_bot/tf', '/tf'),

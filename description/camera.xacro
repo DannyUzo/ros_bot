@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="camera_link"/>
+        <origin xyz="0.305 0 0.08" rpy="0 0 0"/> // The camera is positioned 0.305 meters forward from the chassis center and 0.175 meters above the chassis base. This placement ensures that the camera has a clear line of sight for capturing images and video, while also being securely mounted to the robot's structure.
+    </joint>
+    
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.03 0.03" />
+            </geometry>
+            <material name="orange"/>
+        </visual>
+    </link>
+
+    <joint name="camera_optical_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="camera_link_optical"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/> // The camera is positioned 0.305 meters forward from the chassis center and 0.175 meters above the chassis base. This placement ensures that the camera has a clear line of sight for capturing images and video, while also being securely mounted to the robot's structure.
+    </joint>
+
+
+    <link name="camera_link_optical"></link>
+
+    <gazebo reference="camera_link">
+    <material>Gazebo/Orange</material>
+
+    <sensor name="camera" type="camera">
+        <pose>0 0 0 0 0 0</pose> <!-- Origin of the virtual sensor is at the origin of the link -->
+        <visualize>true</visualize>
+        <update_rate>30</update_rate> <!-- 30 times per second -->
+        
+        <!-- Modern Replacements for the Legacy Plugin -->
+        <topic>camera/image_raw</topic> <!-- Tells Gazebo what internal topic to publish the data to. -->
+        <gz_frame_id>camera_link_optical</gz_frame_id> <!-- Binds the published sensor data to your physical TF frame -->
+        
+        <camera>
+            <horizontal_fov>1.3962634</horizontal_fov> <!-- Field of view in radians -->
+            <image>
+                <width>640</width>
+                <height>480</height>
+                <format>R8G8B8</format> <!-- 8-bit per channel -->
+            </image>
+            <clip>
+                <near>0.1</near> <!-- Minimum distance at which the camera can detect objects. Objects closer than this distance will not be captured in the camera's view. -->
+                <far>100</far> <!-- Maximum distance at which the camera can detect objects. Objects farther than this distance will not be captured in the camera's view. -->
+            </clip>
+        </camera>
+
+        <always_on>true</always_on>
+    </sensor>
+
+</gazebo>
+
+</robot>

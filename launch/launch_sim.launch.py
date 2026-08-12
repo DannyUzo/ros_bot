@@ -98,7 +98,9 @@ def generate_launch_description():
             '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
             '/model/ros_bot/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
         ],
         remappings=[
             ('/model/ros_bot/tf', '/tf'),

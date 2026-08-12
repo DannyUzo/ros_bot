@@ -16,6 +16,13 @@ To run teleop, run this: ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 This is a GitHub template. You can make your own copy by clicking the green "Use this template" button.
 
+For the camera frame note that the coordinate system is different from ROS body standard under the name camera_link_optical and must be rotated.
+
+Problems Faced:
+I mistakenly saved the robot in the custom world so I had to go edit the file my self. 
+LiDAR visualization in Gazebo remained at the map origin instead of tracking a moving robot, run gz model -m ros_bot -l lidar_frame to relink the sensor or a delay/re-order the launch file 
+
+
 It is recommended that you keep the repo/package name the same, but if you do change it, ensure you do a "Find all" using your IDE (or the built-in GitHub IDE by hitting the `.` key) and rename all instances of `ros_bot` to whatever your project's name is.
 
 Note that each directory currently has at least one file in it to ensure that git tracks the files (and, consequently, that a fresh clone has direcctories present for CMake to find). These example files can be removed if required (and the directories can be removed if `CMakeLists.txt` is adjusted accordingly).

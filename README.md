@@ -14,13 +14,21 @@ ros2_control, Odometry
 
 To run teleop, run this: ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
+Run the bot with `ros2 launch ros_bot launch_sim.launch.py`
+
+Build with `colcon build --symlink-install`
+
 This is a GitHub template. You can make your own copy by clicking the green "Use this template" button.
 
 For the camera frame note that the coordinate system is different from ROS body standard under the name camera_link_optical and must be rotated.
+However, this is now obsolete modern Gazebo builds and sensors aren't. 
 
 Problems Faced:
-I mistakenly saved the robot in the custom world so I had to go edit the file my self. 
-LiDAR visualization in Gazebo remained at the map origin instead of tracking a moving robot, run gz model -m ros_bot -l lidar_frame to relink the sensor or a delay/re-order the launch file 
+--I mistakenly saved the robot in the custom world so I had to go edit the file my self. 
+
+--LiDAR visualization in Gazebo remained at the map origin instead of tracking a moving robot, run gz model -m ros_bot -l lidar_frame to relink the sensor or a delay/re-order the launch file. 
+
+-- I used a c++ // style comment in the xml, xml can't parse // so it choke the compilation. 
 
 
 It is recommended that you keep the repo/package name the same, but if you do change it, ensure you do a "Find all" using your IDE (or the built-in GitHub IDE by hitting the `.` key) and rename all instances of `ros_bot` to whatever your project's name is.

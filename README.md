@@ -23,6 +23,8 @@ This is a GitHub template. You can make your own copy by clicking the green "Use
 For the camera frame note that the coordinate system is different from ROS body standard under the name camera_link_optical and must be rotated.
 However, this is now obsolete modern Gazebo builds and sensors aren't. 
 
+To run teleop on Ros2 Control `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel -p stamped:=true`
+
 Problems Faced:
 --I mistakenly saved the robot in the custom world so I had to go edit the file my self. 
 
@@ -30,6 +32,8 @@ Problems Faced:
 
 -- I used a c++ // style comment in the xml, xml can't parse // so it choke the compilation. 
 
+--This was the worst one yet, I encountered a known, active upstream bug in the ROS 2 Lyrical / Gazebo stack (tracked under ros2_control Issue #3401 and Issue #805). Pulling the upstream fix quickly wiped
+my tears away.
 
 It is recommended that you keep the repo/package name the same, but if you do change it, ensure you do a "Find all" using your IDE (or the built-in GitHub IDE by hitting the `.` key) and rename all instances of `ros_bot` to whatever your project's name is.
 

@@ -25,6 +25,8 @@ However, this is now obsolete modern Gazebo builds and sensors aren't.
 
 To run teleop on Ros2 Control `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel -p stamped:=true`
 
+To run slam toolbox `ros2 launch slam_toolbox online_async_launch.py params_file:=./config/mapper_params_online_async.yaml use_sim_time:=true`
+
 Problems Faced:
 --I mistakenly saved the robot in the custom world so I had to go edit the file my self. 
 
